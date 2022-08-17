@@ -7,7 +7,7 @@ public interface IGenericRepository<TEntity, TDto>
     where TEntity : BaseEntity 
     where TDto : BaseDto
 {
-    Task<IEnumerable<TDto>> GetAsync(Predicate<TEntity>? predicate);
+    Task<IEnumerable<TDto>> GetAsync(Predicate<TEntity>? predicate = null);
     Task<TDto?> GetByIdAsync(int id);
     Task<int> UpsertAsync(TDto dto);
     Task<int> DeleteAsync(TDto dto);

@@ -22,7 +22,7 @@ public abstract class GenericRepository<TEntity, TDto> : IGenericRepository<TEnt
         Mapper = mapper;
     }
 
-    public virtual async Task<IEnumerable<TDto>> GetAsync(Predicate<TEntity>? predicate)
+    public virtual async Task<IEnumerable<TDto>> GetAsync(Predicate<TEntity>? predicate = null)
     {
         IQueryable<TEntity> queryable = _table.AsNoTracking();
         if (predicate != null)

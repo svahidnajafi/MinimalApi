@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using MinimalApi.Api.Models;
 using MinimalApi.Api.Persistence;
+using MinimalApi.Api.Repositories;
+using MinimalApi.Api.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 builder.Services.AddTransient<IAppDbContext>(provider => provider.GetService<AppDbContext>() ?? throw new InvalidOperationException());
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddTransient<IIngredientRepository, IngredientRepository>();
+builder.Services.AddTransient<IDrinkRepository, DrinkRepository>();
 
 var app = builder.Build();
 
@@ -28,24 +33,23 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+// Ingredients endpoints
+string ingredientsUrl = "/ingredients"; 
+app.MapGet(ingredientsUrl, async (IIngredientRepository repo) => await repo.GetAsync());
+app.MapPost(ingredientsUrl,
+    async (IIngredientRepository repo, IngredientDto requestBody) => await repo.UpsertAsync(requestBody));
+app.MapDelete(ingredientsUrl + "/{id}", async (IIngredientRepository repo, int id) => await repo.DeleteAsync(id));
+app.MapPut(ingredientsUrl, 
+    async (IIngredientRepository repo, IngredientDto requestBody) => await repo.UpsertAsync(requestBody));
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+// Drink endpoints
+string drinkUrl = "/drinks"; 
+app.MapGet(drinkUrl, async (IDrinkRepository repo) => await repo.GetAsync());
+app.MapPost(drinkUrl,
+    async (IDrinkRepository repo, DrinkDto requestBody) => await repo.UpsertAsync(requestBody));
+app.MapDelete(drinkUrl + "/{id}", async (IDrinkRepository repo, int id) => await repo.DeleteAsync(id));
+app.MapPut(drinkUrl, 
+    async (IDrinkRepository repo, DrinkDto requestBody) => await repo.UpsertAsync(requestBody));
 
 app.Run();
 
