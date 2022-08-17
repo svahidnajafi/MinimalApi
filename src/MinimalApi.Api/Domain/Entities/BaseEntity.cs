@@ -2,8 +2,8 @@
 
 namespace MinimalApi.Api.Domain.Entities;
 
-public class Ingredient : BaseEntity
+public abstract class BaseEntity
 {
-    [Required]
-    public string Name { get; set; }
+    [Key]
+    public int Id { get; set; }
 }

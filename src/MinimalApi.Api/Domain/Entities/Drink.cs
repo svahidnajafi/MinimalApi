@@ -2,10 +2,8 @@
 
 namespace MinimalApi.Api.Domain.Entities;
 
-public class Drink
+public class Drink : BaseEntity
 {
-    [Key]
-    public int Id { get; set; }
     [Required]
     public string Name { get; set; }
     [MaxLength(500)]

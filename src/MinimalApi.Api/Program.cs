@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddTransient<IAppDbContext>(provider => provider.GetService<AppDbContext>() ?? throw new InvalidOperationException());
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
