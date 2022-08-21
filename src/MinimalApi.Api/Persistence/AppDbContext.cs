@@ -10,6 +10,7 @@ public class AppDbContext : DbContext, IAppDbContext
     
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<Drink> Drinks { get; set; }
+    public DbSet<DrinksIngredients> DrinksIngredients { get; set; }
 
     public Task<int> SaveChangesAsync() => base.SaveChangesAsync();
 }

@@ -8,8 +8,8 @@ public interface IGenericRepository<TEntity, TDto>
     where TDto : BaseDto
 {
     Task<IEnumerable<TDto>> GetAsync(Predicate<TEntity>? predicate = null);
-    Task<TDto?> GetByIdAsync(int id);
-    Task<int> UpsertAsync(TDto dto);
-    Task<int> DeleteAsync(TDto dto);
-    Task<int> DeleteAsync(int id);
+    Task<TDto?> GetByIdAsync(string id);
+    Task<string> UpsertAsync(TDto dto);
+    Task<string> DeleteAsync(TDto dto);
+    Task<string> DeleteAsync(string id);
 }

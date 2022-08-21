@@ -38,7 +38,7 @@ string ingredientsUrl = "/ingredients";
 app.MapGet(ingredientsUrl, async (IIngredientRepository repo) => await repo.GetAsync());
 app.MapPost(ingredientsUrl,
     async (IIngredientRepository repo, IngredientDto requestBody) => await repo.UpsertAsync(requestBody));
-app.MapDelete(ingredientsUrl + "/{id}", async (IIngredientRepository repo, int id) => await repo.DeleteAsync(id));
+app.MapDelete(ingredientsUrl + "/{id}", async (IIngredientRepository repo, string id) => await repo.DeleteAsync(id));
 app.MapPut(ingredientsUrl, 
     async (IIngredientRepository repo, IngredientDto requestBody) => await repo.UpsertAsync(requestBody));
 
@@ -47,7 +47,7 @@ string drinkUrl = "/drinks";
 app.MapGet(drinkUrl, async (IDrinkRepository repo) => await repo.GetAsync());
 app.MapPost(drinkUrl,
     async (IDrinkRepository repo, DrinkDto requestBody) => await repo.UpsertAsync(requestBody));
-app.MapDelete(drinkUrl + "/{id}", async (IDrinkRepository repo, int id) => await repo.DeleteAsync(id));
+app.MapDelete(drinkUrl + "/{id}", async (IDrinkRepository repo, string id) => await repo.DeleteAsync(id));
 app.MapPut(drinkUrl, 
     async (IDrinkRepository repo, DrinkDto requestBody) => await repo.UpsertAsync(requestBody));
 

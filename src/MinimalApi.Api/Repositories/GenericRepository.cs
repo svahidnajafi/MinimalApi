@@ -31,7 +31,7 @@ public abstract class GenericRepository<TEntity, TDto> : IGenericRepository<TEnt
         return result;
     }
 
-    public virtual async Task<TDto?> GetByIdAsync(int id)
+    public virtual async Task<TDto?> GetByIdAsync(string id)
     {
         TEntity? drink = await _table.AsNoTracking()
             .SingleOrDefaultAsync(e => e.Id == id);
@@ -39,12 +39,13 @@ public abstract class GenericRepository<TEntity, TDto> : IGenericRepository<TEnt
         return Mapper.Map<TDto>(drink);
     }
 
-    public virtual async Task<int> UpsertAsync(TDto dto)
+    public virtual async Task<string> UpsertAsync(TDto dto)
     {
         TEntity? entity;
         if (dto.Id == null)
         {
             entity = Mapper.Map<TEntity>(dto);
+            entity.Id = Guid.NewGuid().ToString(); 
             _table.Add(entity);
         }
         else
@@ -57,14 +58,14 @@ public abstract class GenericRepository<TEntity, TDto> : IGenericRepository<TEnt
         return entity!.Id;
     }
 
-    public virtual Task<int> DeleteAsync(TDto dto)
+    public virtual Task<string> DeleteAsync(TDto dto)
     {
         if (dto.Id == null)
             throw new ArgumentNullException();
-        return DeleteAsync(dto.Id.Value);
+        return DeleteAsync(dto.Id);
     }
 
-    public virtual async Task<int> DeleteAsync(int id)
+    public virtual async Task<string> DeleteAsync(string id)
     {
         TEntity? entity = await _table.SingleOrDefaultAsync(e => e.Id == id);
         if (entity == null)
