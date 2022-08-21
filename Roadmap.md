@@ -2,7 +2,7 @@
 Roadmap file will define the way we want to go on this project.
 It's mostly like a todo list for now.
 
-- [ ] Change the relation between ingredients and drinks to many to many.
+- [X] Change the relation between ingredients and drinks to many to many.
 - [ ] Fix GET endpoints of drink to include ingredients.
 - [ ] Add GET single entity endpoints for ingredients and drinks.
 - [ ] Add integration tests to the API.
