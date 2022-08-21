@@ -14,24 +14,24 @@ INSERT [dbo].[Drinks] ([Id], [Name], [Recipe]) VALUES (N'drink_4', N'Black Tea',
 INSERT [dbo].[Drinks] ([Id], [Name], [Recipe]) VALUES (N'drink_5', N'Cold water', N'Fill a large cup with water and put 5 piece of ice in it. Let it be for 1 minute and you drink is ready.')
     
 -- Latte
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_1', N'ing_1')
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_1', N'ing_3')
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_1', N'ing_4')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_1', N'drink_1', N'ing_1')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_2', N'drink_1', N'ing_3')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_3', N'drink_1', N'ing_4')
 
 -- Cappuccino
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_2', N'ing_1')
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_2', N'ing_2')
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_2', N'ing_4')
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_2', N'ing_5')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_4', N'drink_2', N'ing_1')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_5', N'drink_2', N'ing_2')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_6', N'drink_2', N'ing_4')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_7', N'drink_2', N'ing_5')
 
 -- Espresso
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_3', N'ing_1')
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_3', N'ing_4')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_8', N'drink_3', N'ing_1')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_9', N'drink_3', N'ing_4')
 
 -- Black Tea
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_4', N'ing_1')
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_4', N'ing_6')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_10', N'drink_4', N'ing_1')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_11', N'drink_4', N'ing_6')
     
 -- Cold Water
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_5', N'ing_1')
-INSERT [dbo].[DrinksIngredients] ([DrinkId], [IngredientId]) VALUES (N'drink_5', N'ing_2')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_12', N'drink_5', N'ing_1')
+INSERT [dbo].[DrinksIngredients] ([Id], [DrinkId], [IngredientId]) VALUES (N'drink_ing_13', N'drink_5', N'ing_2')
