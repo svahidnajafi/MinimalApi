@@ -36,15 +36,19 @@ app.UseHttpsRedirection();
 // Ingredients endpoints
 string ingredientsUrl = "/ingredients"; 
 app.MapGet(ingredientsUrl, async (IIngredientRepository repo) => await repo.GetAsync());
+app.MapGet(ingredientsUrl + "/{id}", 
+    async (IIngredientRepository repo, string id) => await repo.GetByIdAsync(id));
 app.MapPost(ingredientsUrl,
     async (IIngredientRepository repo, IngredientDto requestBody) => await repo.UpsertAsync(requestBody));
-app.MapDelete(ingredientsUrl + "/{id}", async (IIngredientRepository repo, string id) => await repo.DeleteAsync(id));
+app.MapDelete(ingredientsUrl + "/{id}", 
+    async (IIngredientRepository repo, string id) => await repo.DeleteAsync(id));
 app.MapPut(ingredientsUrl, 
     async (IIngredientRepository repo, IngredientDto requestBody) => await repo.UpsertAsync(requestBody));
 
 // Drink endpoints
 string drinkUrl = "/drinks"; 
 app.MapGet(drinkUrl, async (IDrinkRepository repo) => await repo.GetAsync());
+app.MapGet(drinkUrl + "/{id}", async (IDrinkRepository repo, string id) => await repo.GetByIdAsync(id));
 app.MapPost(drinkUrl,
     async (IDrinkRepository repo, DrinkDto requestBody) => await repo.UpsertAsync(requestBody));
 app.MapDelete(drinkUrl + "/{id}", async (IDrinkRepository repo, string id) => await repo.DeleteAsync(id));

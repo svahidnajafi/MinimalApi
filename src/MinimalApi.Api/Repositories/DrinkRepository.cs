@@ -25,13 +25,29 @@ public class DrinkRepository : GenericRepository<Drink, DrinkDto>, IDrinkReposit
                 Id = e.Id,
                 Name = e.Name,
                 Recipe = e.Recipe,
-                Ingredients = e.DrinksIngredients.Select(d => new IngredientDto()
-                {
-                    Id = d.Ingredient.Id,
-                    Name = d.Ingredient.Name
-                })
+                Ingredients = e.DrinksIngredients.Select(e => Map(e))
             })
             .ToListAsync();
         return result;
     }
+
+
+    public override async Task<DrinkDto?> GetByIdAsync(string id)
+    {
+        Drink? drink = await Context.Drinks.AsNoTracking()
+            .Include(e => e.DrinksIngredients)
+            .ThenInclude(e => e.Ingredient)
+            .SingleOrDefaultAsync(e => e.Id == id);
+        if (drink == null) 
+            return default;
+        DrinkDto result = Mapper.Map<DrinkDto>(drink);
+        result.Ingredients = drink.DrinksIngredients.Select(e => Map(e)).ToList();
+        return result;
+    }
+
+    private static IngredientDto Map(DrinksIngredients drinksIngredients) => new()
+        {
+            Id = drinksIngredients.Ingredient.Id,
+            Name = drinksIngredients.Ingredient.Name
+        };
 }
