@@ -21,6 +21,7 @@ builder.Services.AddTransient<IAppDbContext>(provider => provider.GetService<App
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddTransient<IIngredientRepository, IngredientRepository>();
 builder.Services.AddTransient<IDrinkRepository, DrinkRepository>();
+builder.Services.AddScoped<AppDbContextInitializer>();
 
 var app = builder.Build();
 
@@ -29,6 +30,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // Initialize database
+    using (var scope = app.Services.CreateScope())
+    {
+        var initializer = scope.ServiceProvider.GetRequiredService<AppDbContextInitializer>();
+        await initializer.InitializeAsync();
+    }
 }
 
 app.UseHttpsRedirection();
